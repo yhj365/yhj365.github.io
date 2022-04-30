@@ -1,0 +1,1443 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="实用的Vue自定义指令, 浩杰">
+    <meta name="description" content="在 Vue，除了核心功能默认内置的指令 ( v-model 和 v-show )，Vue 也允许注册自定义指令。它的作用价值在于当开发人员在某些场景下需要对普通 DOM 元素进行操作。
+Vue 自定义指令有全局注册和局部注册两种方式。先来看">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>实用的Vue自定义指令 | 浩杰</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">浩杰</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">浩杰</div>
+        <div class="logo-desc">
+            
+            浩杰
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/yhj365" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/yhj365" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        实用的Vue自定义指令
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Vue/">
+                                <span class="chip bg-color">Vue</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Vue/" class="post-category">
+                                Vue
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-12-18
+                </div>
+                
+
+                
+
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>在 Vue，除了核心功能默认内置的指令 ( v-model 和 v-show )，Vue 也允许注册自定义指令。它的作用价值在于当开发人员在某些场景下需要对普通 DOM 元素进行操作。</p>
+<p>Vue 自定义指令有全局注册和局部注册两种方式。先来看看注册全局指令的方式，通过 Vue.directive( id, [definition] ) 方式注册全局指令。然后在入口文件中进行 Vue.use() 调用。</p>
+<p>批量注册指令，新建 directives/index.js 文件</p>
+<pre><code>import copy from &apos;./copy&apos;
+import longpress from &apos;./longpress&apos;
+// 自定义指令
+const directives = {
+  copy,
+  longpress,
+}
+
+export default {
+  install(Vue) {
+    Object.keys(directives).forEach((key) =&gt; {
+      Vue.directive(key, directives[key])
+    })
+  },
+}</code></pre><p>在 main.js 引入并调用import Vue from ‘vue’</p>
+<pre><code>import Directives from &apos;./JS/directives&apos;
+Vue.use(Directives)</code></pre><p>指令定义函数提供了几个钩子函数（可选）：</p>
+<ul>
+<li>bind: 只调用一次，指令第一次绑定到元素时调用，可以定义一个在绑定时执行一次的初始化动作。</li>
+<li>inserted: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。</li>
+<li>update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值。</li>
+<li>componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。</li>
+<li>unbind: 只调用一次， 指令与元素解绑时调用。</li>
+</ul>
+<p><strong>下面分享几个实用的 Vue 自定义指令</strong></p>
+<ul>
+<li>复制粘贴指令 v-copy</li>
+<li>长按指令 v-longpress</li>
+<li>输入框防抖指令 v-debounce</li>
+<li>禁止表情及特殊字符 v-emoji</li>
+<li>图片懒加载 v-LazyLoad</li>
+<li>权限校验指令 v-premission</li>
+<li>实现页面水印 v-waterMarker</li>
+<li>拖拽指令 v-draggable</li>
+</ul>
+<h3 id="v-copy"><a href="#v-copy" class="headerlink" title="v-copy"></a>v-copy</h3><p>需求：实现一键复制文本内容，用于鼠标右键粘贴。<br>思路：</p>
+<ol>
+<li>动态创建 textarea 标签，并设置 readOnly 属性及移出可视区域</li>
+<li>将要复制的值赋给 textarea 标签的 value 属性，并插入到 body</li>
+<li>选中值 textarea 并复制</li>
+<li>将 body 中插入的 textarea 移除</li>
+<li>在第一次调用时绑定事件，在解绑时移除事件</li>
+</ol>
+<pre><code>const copy = {
+  bind(el, { value }) {
+    el.$value = value
+    el.handler = () =&gt; {
+      if (!el.$value) {
+        // 值为空的时候，给出提示。可根据项目UI仔细设计
+        console.log(&apos;无复制内容&apos;)
+        return
+      }
+      // 动态创建 textarea 标签
+      const textarea = document.createElement(&apos;textarea&apos;)
+      // 将该 textarea 设为 readonly 防止 iOS 下自动唤起键盘，同时将 textarea 移出可视区域
+      textarea.readOnly = &apos;readonly&apos;
+      textarea.style.position = &apos;absolute&apos;
+      textarea.style.left = &apos;-9999px&apos;
+      // 将要 copy 的值赋给 textarea 标签的 value 属性
+      textarea.value = el.$value
+      // 将 textarea 插入到 body 中
+      document.body.appendChild(textarea)
+      // 选中值并复制
+      textarea.select()
+      const result = document.execCommand(&apos;Copy&apos;)
+      if (result) {
+        console.log(&apos;复制成功&apos;) // 可根据项目UI仔细设计
+      }
+      document.body.removeChild(textarea)
+    }
+    // 绑定点击事件，就是所谓的一键 copy 啦
+    el.addEventListener(&apos;click&apos;, el.handler)
+  },
+  // 当传进来的值更新的时候触发
+  componentUpdated(el, { value }) {
+    el.$value = value
+  },
+  // 指令与元素解绑的时候，移除事件绑定
+  unbind(el) {
+    el.removeEventListener(&apos;click&apos;, el.handler)
+  },
+}
+
+export default copy</code></pre><p>使用：给 Dom 加上 v-copy 及复制的文本即可</p>
+<pre><code>&lt;template&gt;
+  &lt;button v-copy=&quot;copyText&quot;&gt;复制&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt; export default {
+    data() {
+      return {
+        copyText: &apos;a copy directives&apos;,
+      }
+    },
+  }
+&lt;/script&gt;</code></pre><h3 id="v-longpress"><a href="#v-longpress" class="headerlink" title="v-longpress"></a>v-longpress</h3><p>需求：实现长按，用户需要按下并按住按钮几秒钟，触发相应的事件</p>
+<p>思路：</p>
+<ol>
+<li>创建一个计时器， 2 秒后执行函数</li>
+<li>当用户按下按钮时触发 mousedown 事件，启动计时器；用户松开按钮时调用 mouseout 事件。</li>
+<li>如果 mouseup 事件 2 秒内被触发，就清除计时器，当作一个普通的点击事件</li>
+<li>如果计时器没有在 2 秒内清除，则判定为一次长按，可以执行关联的函数。</li>
+<li>在移动端要考虑 touchstart，touchend 事件</li>
+</ol>
+<pre><code>const longpress = {
+  bind: function (el, binding, vNode) {
+    if (typeof binding.value !== &apos;function&apos;) {
+      throw &apos;callback must be a function&apos;
+    }
+    // 定义变量
+    let pressTimer = null
+    // 创建计时器（ 2秒后执行函数 ）
+    let start = (e) =&gt; {
+      if (e.type === &apos;click&apos; &amp;&amp; e.button !== 0) {
+        return
+      }
+      if (pressTimer === null) {
+        pressTimer = setTimeout(() =&gt; {
+          handler()
+        }, 2000)
+      }
+    }
+    // 取消计时器
+    let cancel = (e) =&gt; {
+      if (pressTimer !== null) {
+        clearTimeout(pressTimer)
+        pressTimer = null
+      }
+    }
+    // 运行函数
+    const handler = (e) =&gt; {
+      binding.value(e)
+    }
+    // 添加事件监听器
+    el.addEventListener(&apos;mousedown&apos;, start)
+    el.addEventListener(&apos;touchstart&apos;, start)
+    // 取消计时器
+    el.addEventListener(&apos;click&apos;, cancel)
+    el.addEventListener(&apos;mouseout&apos;, cancel)
+    el.addEventListener(&apos;touchend&apos;, cancel)
+    el.addEventListener(&apos;touchcancel&apos;, cancel)
+  },
+  // 当传进来的值更新的时候触发
+  componentUpdated(el, { value }) {
+    el.$value = value
+  },
+  // 指令与元素解绑的时候，移除事件绑定
+  unbind(el) {
+    el.removeEventListener(&apos;click&apos;, el.handler)
+  },
+}
+
+export default longpress</code></pre><p>使用：给 Dom 加上 v-longpress 及回调函数即可</p>
+<pre><code>&lt;template&gt;
+  &lt;button v-longpress=&quot;longpress&quot;&gt;长按&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt; 
+export default {
+  methods: {
+    longpress () {
+      alert(&apos;长按指令生效&apos;)
+    }
+  }
+} 
+&lt;/script&gt;</code></pre><h3 id="v-debounce"><a href="#v-debounce" class="headerlink" title="v-debounce"></a>v-debounce</h3><p>背景：在开发中，有些提交保存按钮有时候会在短时间内被点击多次，这样就会多次重复请求后端接口，造成数据的混乱，比如新增表单的提交按钮，多次点击就会新增多条重复的数据。<br>需求：防止按钮在短时间内被多次点击，使用防抖函数限制规定时间内只能点击一次。<br>思路：</p>
+<ol>
+<li>定义一个延迟执行的方法，如果在延迟时间内再调用该方法，则重新计算执行时间。</li>
+<li>将时间绑定在 click 方法上。</li>
+</ol>
+<pre><code>const debounce = {
+  inserted: function (el, binding) {
+    let timer
+    el.addEventListener(&apos;keyup&apos;, () =&gt; {
+      if (timer) {
+        clearTimeout(timer)
+      }
+      timer = setTimeout(() =&gt; {
+        binding.value()
+      }, 1000)
+    })
+  },
+}
+
+export default debounce</code></pre><p>使用：给 Dom 加上 v-debounce 及回调函数即可</p>
+<pre><code>&lt;template&gt;
+  &lt;button v-debounce=&quot;debounceClick&quot;&gt;防抖&lt;/button&gt;
+&lt;/template&gt;
+
+&lt;script&gt; 
+export default {
+  methods: {
+    debounceClick () {
+      console.log(&apos;只触发一次&apos;)
+    }
+  }
+} 
+&lt;/script&gt;</code></pre><h3 id="v-emoji"><a href="#v-emoji" class="headerlink" title="v-emoji"></a>v-emoji</h3><p>背景：开发中遇到的表单输入，往往会有对输入内容的限制，比如不能输入表情和特殊字符，只能输入数字或字母等。</p>
+<p>我们常规方法是在每一个表单的 on-change 事件上做处理。</p>
+<pre><code>&lt;template&gt;
+  &lt;input type=&quot;text&quot; v-model=&quot;note&quot; @change=&quot;vaidateEmoji&quot; /&gt;
+&lt;/template&gt;
+
+&lt;script&gt; export default {
+    methods: {
+      vaidateEmoji() {
+        var reg = /[^u4E00-u9FA5|d|a-zA-Z|rns,.?!，。？！…—&amp;$=()-+/*{}[]]|s/g
+        this.note = this.note.replace(reg, &apos;&apos;)
+      },
+    },
+  } 
+&lt;/script&gt;</code></pre><p>这样代码量比较大而且不好维护，所以我们需要自定义一个指令来解决这问题。</p>
+<p>需求：根据正则表达式，设计自定义处理表单输入规则的指令，下面以禁止输入表情和特殊字符为例。</p>
+<pre><code>let findEle = (parent, type) =&gt; {
+  return parent.tagName.toLowerCase() === type ? parent : parent.querySelector(type)
+}
+
+const trigger = (el, type) =&gt; {
+  const e = document.createEvent(&apos;HTMLEvents&apos;)
+  e.initEvent(type, true, true)
+  el.dispatchEvent(e)
+}
+
+const emoji = {
+  bind: function (el, binding, vnode) {
+    // 正则规则可根据需求自定义
+    var regRule = /[^u4E00-u9FA5|d|a-zA-Z|rns,.?!，。？！…—&amp;$=()-+/*{}[]]|s/g
+    let $inp = findEle(el, &apos;input&apos;)
+    el.$inp = $inp
+    $inp.handle = function () {
+      let val = $inp.value
+      $inp.value = val.replace(regRule, &apos;&apos;)
+
+      trigger($inp, &apos;input&apos;)
+    }
+    $inp.addEventListener(&apos;keyup&apos;, $inp.handle)
+  },
+  unbind: function (el) {
+    el.$inp.removeEventListener(&apos;keyup&apos;, el.$inp.handle)
+  },
+}
+
+export default emoji</code></pre><p>使用：将需要校验的输入框加上 v-emoji 即可</p>
+<pre><code>&lt;template&gt;
+  &lt;input type=&quot;text&quot; v-model=&quot;note&quot; v-emoji /&gt;
+&lt;/template&gt;</code></pre><h3 id="v-LazyLoad"><a href="#v-LazyLoad" class="headerlink" title="v-LazyLoad"></a>v-LazyLoad</h3><p>背景：在类电商类项目，往往存在大量的图片，如 banner 广告图，菜单导航图，美团等商家列表头图等。图片众多以及图片体积过大往往会影响页面加载速度，造成不良的用户体验，所以进行图片懒加载优化势在必行。</p>
+<p>需求：实现一个图片懒加载指令，只加载浏览器可见区域的图片。</p>
+<p>思路：</p>
+<ol>
+<li>图片懒加载的原理主要是判断当前图片是否到了可视区域这一核心逻辑实现的</li>
+<li>拿到所有的图片 Dom ，遍历每个图片判断当前图片是否到了可视区范围内</li>
+<li>如果到了就设置图片的 src 属性，否则显示默认图片</li>
+</ol>
+<p>图片懒加载有两种方式可以实现，一是绑定 srcoll 事件进行监听，二是使用 IntersectionObserver 判断图片是否到了可视区域，但是有浏览器兼容性问题。</p>
+<p>下面封装一个懒加载指令兼容两种方法，判断浏览器是否支持 IntersectionObserver API，如果支持就使用 IntersectionObserver 实现懒加载，否则则使用 srcoll 事件监听 + 节流的方法实现。</p>
+<pre><code>const LazyLoad = {
+  // install方法
+  install(Vue, options) {
+    const defaultSrc = options.default
+    Vue.directive(&apos;lazy&apos;, {
+      bind(el, binding) {
+        LazyLoad.init(el, binding.value, defaultSrc)
+      },
+      inserted(el) {
+        if (IntersectionObserver) {
+          LazyLoad.observe(el)
+        } else {
+          LazyLoad.listenerScroll(el)
+        }
+      },
+    })
+  },
+  // 初始化
+  init(el, val, def) {
+    el.setAttribute(&apos;data-src&apos;, val)
+    el.setAttribute(&apos;src&apos;, def)
+  },
+  // 利用IntersectionObserver监听el
+  observe(el) {
+    var io = new IntersectionObserver((entries) =&gt; {
+      const realSrc = el.dataset.src
+      if (entries[0].isIntersecting) {
+        if (realSrc) {
+          el.src = realSrc
+          el.removeAttribute(&apos;data-src&apos;)
+        }
+      }
+    })
+    io.observe(el)
+  },
+  // 监听scroll事件
+  listenerScroll(el) {
+    const handler = LazyLoad.throttle(LazyLoad.load, 300)
+    LazyLoad.load(el)
+    window.addEventListener(&apos;scroll&apos;, () =&gt; {
+      handler(el)
+    })
+  },
+  // 加载真实图片
+  load(el) {
+    const windowHeight = document.documentElement.clientHeight
+    const elTop = el.getBoundingClientRect().top
+    const elBtm = el.getBoundingClientRect().bottom
+    const realSrc = el.dataset.src
+    if (elTop - windowHeight &lt; 0 &amp;&amp; elBtm &gt; 0) {
+      if (realSrc) {
+        el.src = realSrc
+        el.removeAttribute(&apos;data-src&apos;)
+      }
+    }
+  },
+  // 节流
+  throttle(fn, delay) {
+    let timer
+    let prevTime
+    return function (...args) {
+      const currTime = Date.now()
+      const context = this
+      if (!prevTime) prevTime = currTime
+      clearTimeout(timer)
+
+      if (currTime - prevTime &gt; delay) {
+        prevTime = currTime
+        fn.apply(context, args)
+        clearTimeout(timer)
+        return
+      }
+
+      timer = setTimeout(function () {
+        prevTime = Date.now()
+        timer = null
+        fn.apply(context, args)
+      }, delay)
+    }
+  },
+}
+
+export default LazyLoad</code></pre><p>使用，将组件内 标签的 src 换成 v-LazyLoad</p>
+<pre><code>&lt;img v-LazyLoad=&quot;xxx.jpg&quot; /&gt;</code></pre><h3 id="v-permission"><a href="#v-permission" class="headerlink" title="v-permission"></a>v-permission</h3><p>背景：在一些后台管理系统，我们可能需要根据用户角色进行一些操作权限的判断，很多时候我们都是粗暴地给一个元素添加 v-if / v-show 来进行显示隐藏，但如果判断条件繁琐且多个地方需要判断，这种方式的代码不仅不优雅而且冗余。针对这种情况，我们可以通过全局自定义指令来处理。</p>
+<p>需求：自定义一个权限指令，对需要权限判断的 Dom 进行显示隐藏。</p>
+<p>思路：</p>
+<ol>
+<li>自定义一个权限数组</li>
+<li>判断用户的权限是否在这个数组内，如果是则显示，否则则移除 Dom</li>
+</ol>
+<pre><code>function checkArray(key) {
+  let arr = [&apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]
+  let index = arr.indexOf(key)
+  if (index &gt; -1) {
+    return true // 有权限
+  } else {
+    return false // 无权限
+  }
+}
+
+const permission = {
+  inserted: function (el, binding) {
+    let permission = binding.value // 获取到 v-permission的值
+    if (permission) {
+      let hasPermission = checkArray(permission)
+      if (!hasPermission) {
+        // 没有权限 移除Dom元素
+        el.parentNode &amp;&amp; el.parentNode.removeChild(el)
+      }
+    }
+  },
+}
+
+export default permission</code></pre><p>使用：给 v-permission 赋值判断即可</p>
+<pre><code>&lt;div class=&quot;btns&quot;&gt;
+  &lt;!-- 显示 --&gt;
+  &lt;button v-permission=&quot;&apos;1&apos;&quot;&gt;权限按钮1&lt;/button&gt;
+  &lt;!-- 不显示 --&gt;
+  &lt;button v-permission=&quot;&apos;10&apos;&quot;&gt;权限按钮2&lt;/button&gt;
+&lt;/div&gt;</code></pre><h3 id="vue-waterMarker"><a href="#vue-waterMarker" class="headerlink" title="vue-waterMarker"></a>vue-waterMarker</h3><p>需求：给整个页面添加背景水印</p>
+<p>思路：</p>
+<ol>
+<li>使用 canvas 特性生成 base64 格式的图片文件，设置其字体大小，颜色等。</li>
+<li>将其设置为背景图片，从而实现页面或组件水印效果</li>
+</ol>
+<pre><code>function addWaterMarker(str, parentNode, font, textColor) {
+  // 水印文字，父元素，字体，文字颜色
+  var can = document.createElement(&apos;canvas&apos;)
+  parentNode.appendChild(can)
+  can.width = 200
+  can.height = 150
+  can.style.display = &apos;none&apos;
+  var cans = can.getContext(&apos;2d&apos;)
+  cans.rotate((-20 * Math.PI) / 180)
+  cans.font = font || &apos;16px Microsoft JhengHei&apos;
+  cans.fillStyle = textColor || &apos;rgba(180, 180, 180, 0.3)&apos;
+  cans.textAlign = &apos;left&apos;
+  cans.textBaseline = &apos;Middle&apos;
+  cans.fillText(str, can.width / 10, can.height / 2)
+  parentNode.style.backgroundImage = &apos;url(&apos; + can.toDataURL(&apos;image/png&apos;) + &apos;)&apos;
+}
+
+const waterMarker = {
+  bind: function (el, binding) {
+    addWaterMarker(binding.value.text, el, binding.value.font, binding.value.textColor)
+  },
+}
+
+export default waterMarker</code></pre><p>使用，设置水印文案，颜色，字体大小即可</p>
+<pre><code>&lt;template&gt;
+  &lt;div v-waterMarker=&quot;{text:&apos;lzg版权所有&apos;,textColor:&apos;rgba(180, 180, 180, 0.4)&apos;}&quot;&gt;&lt;/div&gt;
+&lt;/template&gt;</code></pre><h3 id="v-draggable"><a href="#v-draggable" class="headerlink" title="v-draggable"></a>v-draggable</h3><p>需求：实现一个拖拽指令，可在页面可视区域任意拖拽元素。</p>
+<p>思路：</p>
+<ol>
+<li>设置需要拖拽的元素为相对定位，其父元素为绝对定位。</li>
+<li>鼠标按下(onmousedown)时记录目标元素当前的 left 和 top 值。</li>
+<li>鼠标移动(onmousemove)时计算每次移动的横向距离和纵向距离的变化值，并改变元素的 left 和 top 值</li>
+<li>鼠标松开(onmouseup)时完成一次拖拽</li>
+</ol>
+<pre><code>const draggable = {
+  inserted: function (el) {
+    el.style.cursor = &apos;move&apos;
+    el.onmousedown = function (e) {
+      let disx = e.pageX - el.offsetLeft
+      let disy = e.pageY - el.offsetTop
+      document.onmousemove = function (e) {
+        let x = e.pageX - disx
+        let y = e.pageY - disy
+        let maxX = document.body.clientWidth - parseInt(window.getComputedStyle(el).width)
+        let maxY = document.body.clientHeight - parseInt(window.getComputedStyle(el).height)
+        if (x &lt; 0) {
+          x = 0
+        } else if (x &gt; maxX) {
+          x = maxX
+        }
+
+        if (y &lt; 0) {
+          y = 0
+        } else if (y &gt; maxY) {
+          y = maxY
+        }
+
+        el.style.left = x + &apos;px&apos;
+        el.style.top = y + &apos;px&apos;
+      }
+      document.onmouseup = function () {
+        document.onmousemove = document.onmouseup = null
+      }
+    }
+  },
+}
+export default draggable</code></pre><p>使用: 在 Dom 上加上 v-draggable 即可</p>
+<pre><code>&lt;template&gt;
+  &lt;div class=&quot;el-dialog&quot; v-draggable&gt;&lt;/div&gt;
+&lt;/template&gt;</code></pre><p>  所有指令源码地址 <a href="https://github.com/Michael-lzg/v-directives" target="_blank" rel="noopener">github.com/Michael-lzg…</a></p>
+<p>原作者姓名： lzg9527<br>原出处：segmentfault<br>原文链接：<a href="https://segmentfault.com/a/1190000038475001" target="_blank" rel="noopener">分享8个非常实用的Vue自定义指令_个人文章 - SegmentFault 思否</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.5717767.xyz" rel="external nofollow noreferrer">Hao Jie</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.5717767.xyz/posts/955252516.html">http://blog.5717767.xyz/posts/955252516.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://blog.5717767.xyz" target="_blank">Hao Jie</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Vue/">
+                                    <span class="chip bg-color">Vue</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/1715802062.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="react基础">
+                        
+                        <span class="card-title">react基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            react基础知识
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-06-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/react/" class="post-category">
+                                    react
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/react/">
+                        <span class="chip bg-color">react</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%89%8D%E7%AB%AF/">
+                        <span class="chip bg-color">前端</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/1480820541.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="程序员必须掌握的英语单词">
+                        
+                        <span class="card-title">程序员必须掌握的英语单词</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            600个英语单词
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2019-12-17
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%8B%B1%E8%AF%AD/" class="post-category">
+                                    英语
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%8B%B1%E8%AF%AD/">
+                        <span class="chip bg-color">英语</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="http://blog.5717767.xyz" target="_blank">HaoJie</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "4";
+                    var startDate = "17";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://beian.miit.gov.cn" target="_blank">浙ICP备19025718号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/yhj365" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:365435306@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=365435306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 365435306" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+        var OriginTitile = document.title, st;
+        document.addEventListener("visibilitychange", function () { document.hidden ? (document.title = "梦想还是要有的", clearTimeout(st)) : (document.title = "万一实现了呢", st = setTimeout(function () { document.title = OriginTitile }, 3e3)) })
+        </script>
+        <script type="text/javascript"> 
+      WIDGET = {FID: '1tFpFZ5Mtj'} 
+    </script> 
+    <script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</body>
+
+</html>

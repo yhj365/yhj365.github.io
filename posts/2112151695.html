@@ -1,0 +1,1330 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Spring基础学习, 浩杰">
+    <meta name="description" content="1. spring概述1.1 Spring是什么（理解）Spring是分层的 Java SE/EE应用 full-stack 轻量级开源框架，以 IoC（Inverse Of Control：反转控制）和 AOP（Aspect Orient">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Spring基础学习 | 浩杰</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    
+    <script src="/libs/jquery/jquery.min.js"></script>
+    
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper head-container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">浩杰</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">浩杰</div>
+        <div class="logo-desc">
+            
+            浩杰
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/yhj365" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        color: #0f9d58;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/yhj365" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Fork Me" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Spring基础学习
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Java/">
+                                <span class="chip bg-color">Java</span>
+                            </a>
+                        
+                            <a href="/tags/Spring/">
+                                <span class="chip bg-color">Spring</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Spring/" class="post-category">
+                                Spring
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-09-03
+                </div>
+                
+
+                
+
+                
+
+                
+				
+                
+            </div>
+            
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="1-spring概述"><a href="#1-spring概述" class="headerlink" title="1. spring概述"></a>1. spring概述</h2><h3 id="1-1-Spring是什么（理解）"><a href="#1-1-Spring是什么（理解）" class="headerlink" title="1.1 Spring是什么（理解）"></a>1.1 Spring是什么（理解）</h3><p>Spring是分层的 Java SE/EE应用 full-stack 轻量级开源框架，以 IoC（Inverse Of Control：反转控制）和 AOP（Aspect Oriented Programming：面向切面编程）为内核。</p>
+<p>提供了展现层 SpringMVC和持久层 Spring JDBCTemplate以及业务层事务管理等众多的企业级应用技术，还能整合开源世界众多著名的第三方框架和类库，逐渐成为使用最多的Java EE 企业应用开源框架</p>
+<h3 id="1-2-Spring发展历程-（了解）"><a href="#1-2-Spring发展历程-（了解）" class="headerlink" title="1.2 Spring发展历程 （了解）"></a>1.2 Spring发展历程 （了解）</h3><p>Rod Johnson （ Spring 之父）</p>
+<p>2017  年<br>9 月份发布了 Spring 的最新版本 Spring5.0<br>通用版（GA）</p>
+<h3 id="1-3-Spring的优势（理解）"><a href="#1-3-Spring的优势（理解）" class="headerlink" title="1.3 Spring的优势（理解）"></a>1.3 Spring的优势（理解）</h3><p>方便解耦，简化开发</p>
+<p>AOP 编程的支持</p>
+<p>声明式事务的支持</p>
+<p>方便程序的测试</p>
+<h3 id="1-4-Spring的体系结构（了解）"><a href="#1-4-Spring的体系结构（了解）" class="headerlink" title="1.4 Spring的体系结构（了解）"></a>1.4 Spring的体系结构（了解）</h3><h2 id="2-spring快速入门"><a href="#2-spring快速入门" class="headerlink" title="2. spring快速入门"></a>2. spring快速入门</h2><h3 id="2-1-Spring程序开发步骤"><a href="#2-1-Spring程序开发步骤" class="headerlink" title="2.1 Spring程序开发步骤"></a>2.1 Spring程序开发步骤</h3><p>①导入 Spring 开发的基本包坐标</p>
+<p>②编写 Dao 接口和实现类</p>
+<p>③创建 Spring 核心配置文件</p>
+<p>④在 Spring 配置文件中配置 UserDaoImpl</p>
+<p>⑤使用 Spring 的 API 获得 Bean 实例</p>
+<h3 id="2-2-导入Spring开发的基本包坐标"><a href="#2-2-导入Spring开发的基本包坐标" class="headerlink" title="2.2 导入Spring开发的基本包坐标"></a>2.2 导入Spring开发的基本包坐标</h3><pre><code>//xml
+&lt;properties&gt;
+  &lt;spring.version&gt;5.0.5.RELEASE&lt;/spring.version&gt;
+&lt;/properties&gt;
+&lt;!--导入spring的context坐标，context依赖core、beans、expression--&gt;
+&lt;dependencies&gt; 
+    &lt;dependency&gt;  
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt; 
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt; 
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre><h3 id="2-3-编写Dao接口和实现类"><a href="#2-3-编写Dao接口和实现类" class="headerlink" title="2.3 编写Dao接口和实现类"></a>2.3 编写Dao接口和实现类</h3><pre><code>//java
+public interface UserDao {  
+    public void save();
+}
+
+public class UserDaoImpl implements UserDao {  
+        @Override  
+        public void save() {
+          System.out.println(&quot;UserDao save method running....&quot;);
+  }
+}</code></pre><h3 id="2-4-创建Spring核心配置文件"><a href="#2-4-创建Spring核心配置文件" class="headerlink" title="2.4 创建Spring核心配置文件"></a>2.4 创建Spring核心配置文件</h3><p>在类路径下（resources）创建applicationContext.xml配置文件</p>
+<pre><code>//xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+&lt;/beans&gt;</code></pre><h3 id="2-5-在Spring配置文件中配置UserDaoImpl"><a href="#2-5-在Spring配置文件中配置UserDaoImpl" class="headerlink" title="2.5 在Spring配置文件中配置UserDaoImpl"></a>2.5 在Spring配置文件中配置UserDaoImpl</h3><pre><code>//xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+  &lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;&lt;/bean&gt;
+&lt;/beans&gt;</code></pre><h3 id="2-6-使用Spring的API获得Bean实例"><a href="#2-6-使用Spring的API获得Bean实例" class="headerlink" title="2.6 使用Spring的API获得Bean实例"></a>2.6 使用Spring的API获得Bean实例</h3><pre><code>//java
+@Test
+public void test1(){
+    ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        UserDao userDao = (UserDao) applicationContext.getBean(&quot;userDao&quot;);
+        userDao.save();
+}</code></pre><h2 id="3-Spring配置文件"><a href="#3-Spring配置文件" class="headerlink" title="3. Spring配置文件"></a>3. Spring配置文件</h2><h3 id="3-1-Bean标签基本配置"><a href="#3-1-Bean标签基本配置" class="headerlink" title="3.1 Bean标签基本配置"></a>3.1 Bean标签基本配置</h3><p>用于配置对象交由Spring 来创建。</p>
+<p>默认情况下它调用的是类中的无参构造函数，如果没有无参构造函数则不能创建成功。</p>
+<p>基本属性：</p>
+<p>id：Bean实例在Spring容器中的唯一标识</p>
+<p>class：Bean的全限定名称</p>
+<h3 id="3-2-Bean标签范围配置"><a href="#3-2-Bean标签范围配置" class="headerlink" title="3.2 Bean标签范围配置"></a>3.2 Bean标签范围配置</h3><p>scope:指对象的作用范围，取值如下： </p>
+<table>
+<thead>
+<tr>
+<th>取值范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>singleton</td>
+<td>默认值，单例的</td>
+</tr>
+<tr>
+<td>prototype</td>
+<td>多例的</td>
+</tr>
+<tr>
+<td>request</td>
+<td>WEB   项目中，Spring   创建一个   Bean   的对象，将对象存入到   request   域中</td>
+</tr>
+<tr>
+<td>session</td>
+<td>WEB   项目中，Spring   创建一个   Bean   的对象，将对象存入到   session   域中</td>
+</tr>
+<tr>
+<td>global   session</td>
+<td>WEB   项目中，应用在   Portlet   环境，如果没有   Portlet   环境那么globalSession   相当于   session</td>
+</tr>
+</tbody></table>
+<p>1）当scope的取值为singleton时</p>
+<p>​      Bean的实例化个数：1个</p>
+<p>​      Bean的实例化时机：当Spring核心文件被加载时，实例化配置的Bean实例</p>
+<p>​      Bean的生命周期：</p>
+<p>对象创建：当应用加载，创建容器时，对象就被创建了</p>
+<p>对象运行：只要容器在，对象一直活着</p>
+<p>对象销毁：当应用卸载，销毁容器时，对象就被销毁了</p>
+<p>2）当scope的取值为prototype时</p>
+<p>​      Bean的实例化个数：多个</p>
+<p>​      Bean的实例化时机：当调用getBean()方法时实例化Bean</p>
+<p>对象创建：当使用对象时，创建新的对象实例</p>
+<p>对象运行：只要对象在使用中，就一直活着</p>
+<p>对象销毁：当对象长时间不用时，被 Java 的垃圾回收器回收了</p>
+<h3 id="3-3-Bean生命周期配置"><a href="#3-3-Bean生命周期配置" class="headerlink" title="3.3 Bean生命周期配置"></a>3.3 Bean生命周期配置</h3><p>init-method：指定类中的初始化方法名称</p>
+<p>destroy-method：指定类中销毁方法名称</p>
+<h3 id="3-4-Bean实例化三种方式"><a href="#3-4-Bean实例化三种方式" class="headerlink" title="3.4 Bean实例化三种方式"></a>3.4 Bean实例化三种方式</h3><p>1） 使用无参构造方法实例化</p>
+<p>​      它会根据默认无参构造方法来创建类对象，如果bean中没有默认无参构造函数，将会创建失败</p>
+<pre><code>//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;/&gt;</code></pre><p>2） 工厂静态方法实例化</p>
+<p>​      工厂的静态方法返回Bean实例</p>
+<pre><code>//java
+public class StaticFactoryBean {
+    public static UserDao createUserDao(){    
+    return new UserDaoImpl();
+    }
+}
+
+//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.factory.StaticFactoryBean&quot; 
+      factory-method=&quot;createUserDao&quot; /&gt;</code></pre><p>3） 工厂实例方法实例化</p>
+<p>​      工厂的非静态方法返回Bean实例</p>
+<pre><code>//java
+public class DynamicFactoryBean {  
+  public UserDao createUserDao(){        
+    return new UserDaoImpl(); 
+  }
+}
+
+
+//xml
+&lt;bean id=&quot;factoryBean&quot; class=&quot;com.demo.factory.DynamicFactoryBean&quot;/&gt;
+&lt;bean id=&quot;userDao&quot; factory-bean=&quot;factoryBean&quot; factory-method=&quot;createUserDao&quot;/&gt;</code></pre><h3 id="3-5-Bean的依赖注入入门"><a href="#3-5-Bean的依赖注入入门" class="headerlink" title="3.5 Bean的依赖注入入门"></a>3.5 Bean的依赖注入入门</h3><p>①创建 UserService，UserService 内部在调用 UserDao的save() 方法</p>
+<pre><code>//java
+public class UserServiceImpl implements UserService {
+  @Override
+  public void save() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+          UserDao userDao = (UserDao) applicationContext.getBean(&quot;userDao&quot;);    
+          userDao.save();
+  }
+}</code></pre><p>②将 UserServiceImpl 的创建权交给 Spring</p>
+<pre><code>//xml
+&lt;bean id=&quot;userService&quot; class=&quot;com.demo.service.impl.UserServiceImpl&quot;/&gt;</code></pre><p>③从 Spring 容器中获得 UserService 进行操作</p>
+<pre><code>//java
+ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+UserService userService = (UserService) applicationContext.getBean(&quot;userService&quot;);
+userService.save();</code></pre><h3 id="3-6-Bean的依赖注入概念"><a href="#3-6-Bean的依赖注入概念" class="headerlink" title="3.6 Bean的依赖注入概念"></a>3.6 Bean的依赖注入概念</h3><p>依赖注入（Dependency Injection）：它是 Spring 框架核心 IOC 的具体实现。</p>
+<p>在编写程序时，通过控制反转，把对象的创建交给了 Spring，但是代码中不可能出现没有依赖的情况。</p>
+<p>IOC 解耦只是降低他们的依赖关系，但不会消除。例如：业务层仍会调用持久层的方法。</p>
+<p>那这种业务层和持久层的依赖关系，在使用 Spring 之后，就让 Spring 来维护了。</p>
+<p>简单的说，就是坐等框架把持久层对象传入业务层，而不用我们自己去获取</p>
+<h3 id="3-7-Bean的依赖注入方式"><a href="#3-7-Bean的依赖注入方式" class="headerlink" title="3.7 Bean的依赖注入方式"></a>3.7 Bean的依赖注入方式</h3><p>①构造方法</p>
+<pre><code>//创建有参构造
+//java
+public class UserServiceImpl implements UserService {
+@Override
+public void save() {
+ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+    UserDao userDao = (UserDao) applicationContext.getBean(&quot;userDao&quot;);    
+          userDao.save();
+    }
+}
+
+
+//配置Spring容器调用有参构造时进行注入
+//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;/&gt;
+&lt;bean id=&quot;userService&quot; class=&quot;com.demo.service.impl.UserServiceImpl&quot;&gt; 
+  &lt;constructor-arg name=&quot;userDao&quot; ref=&quot;userDao&quot;&gt;&lt;/constructor-arg&gt;
+&lt;/bean&gt;</code></pre><p>②set方法</p>
+<pre><code>//在UserServiceImpl中添加setUserDao方法
+//java
+public class UserServiceImpl implements UserService {
+    private UserDao userDao;
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;  
+        } 
+    @Override    
+    public void save() {      
+      userDao.save();
+  }
+}</code></pre><p>​      配置Spring容器调用set方法进行注入</p>
+<pre><code>//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;/&gt;
+&lt;bean id=&quot;userService&quot; class=&quot;com.demo.service.impl.UserServiceImpl&quot;&gt;
+  &lt;property name=&quot;userDao&quot; ref=&quot;userDao&quot;/&gt;
+&lt;/bean&gt;</code></pre><p>set方法:P命名空间注入</p>
+<p>​      P命名空间注入本质也是set方法注入，但比起上述的set方法注入更加方便，主要体现在配置文件中，如下：</p>
+<p>​      首先，需要引入P命名空间：</p>
+<pre><code>//xml
+xmlns:p=&quot;http://www.springframework.org/schema/p&quot;</code></pre><p>其次，需要修改注入方式</p>
+<pre><code>//xml
+&lt;bean id=&quot;userService&quot; class=&quot;com.demo.service.impl.UserServiceImpl&quot; p:userDao-
+ref=&quot;userDao&quot;/&gt;</code></pre><h3 id="3-8-Bean的依赖注入的数据类型"><a href="#3-8-Bean的依赖注入的数据类型" class="headerlink" title="3.8 Bean的依赖注入的数据类型"></a>3.8 Bean的依赖注入的数据类型</h3><p>上面的操作，都是注入的引用Bean，处了对象的引用可以注入，普通数据类型，集合等都可以在容器中进行注入。</p>
+<p>注入数据的三种数据类型 </p>
+<p>普通数据类型</p>
+<p>引用数据类型</p>
+<p>集合数据类型</p>
+<p>其中引用数据类型，此处就不再赘述了，之前的操作都是对UserDao对象的引用进行注入的，下面将以set方法注入为例，演示普通数据类型和集合数据类型的注入。</p>
+<p><strong>Bean的依赖注入的数据类型</strong></p>
+<p>（1）普通数据类型的注入</p>
+<pre><code>//java
+public class UserDaoImpl implements UserDao {
+private String company;
+    private int age;
+    public void setCompany(String company) {
+        this.company = company;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public void save() {
+        System.out.println(company+&quot;===&quot;+age);
+        System.out.println(&quot;UserDao save method running....&quot;);   
+    }
+}
+
+
+//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;company&quot; value=&quot;德玛西亚&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;age&quot; value=&quot;15&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;</code></pre><p>（2）集合数据类型（List<String>）的注入</p>
+<pre><code>//java
+public class UserDaoImpl implements UserDao {
+  private List&lt;String&gt; strList;
+  public void setStrList(List&lt;String&gt; strList) {
+    this.strList = strList;
+  }
+  public void save() {
+        System.out.println(strList);
+        System.out.println(&quot;UserDao save method running....&quot;);
+  }
+}
+
+
+//xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;strList&quot;&gt;
+        &lt;list&gt;
+            &lt;value&gt;aaa&lt;/value&gt;
+            &lt;value&gt;bbb&lt;/value&gt;
+            &lt;value&gt;ccc&lt;/value&gt;
+        &lt;/list&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><p>（3）集合数据类型（List<User>）的注入</p>
+<pre><code>//java
+public class UserDaoImpl implements UserDao {
+  private List&lt;User&gt; userList;
+  public void setUserList(List&lt;User&gt; userList) {
+  this.userList = userList;  
+}
+public void save() {
+  System.out.println(userList);
+  System.out.println(&quot;UserDao save method running....&quot;);
+  }
+}
+
+
+//xml
+&lt;bean id=&quot;u1&quot; class=&quot;com.demo.domain.User&quot;/&gt;
+&lt;bean id=&quot;u2&quot; class=&quot;com.demo.domain.User&quot;/&gt;
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;userList&quot;&gt;
+        &lt;list&gt;
+            &lt;bean class=&quot;com.demo.domain.User&quot;/&gt;
+            &lt;bean class=&quot;com.demo.domain.User&quot;/&gt;
+            &lt;ref bean=&quot;u1&quot;/&gt;
+            &lt;ref bean=&quot;u2&quot;/&gt;       
+        &lt;/list&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><p>（4）集合数据类型（ Map&lt;String,User&gt; ）的注入</p>
+<pre><code>//java
+public class UserDaoImpl implements UserDao {
+    private Map&lt;String,User&gt; userMap;
+    public void setUserMap(Map&lt;String, User&gt; userMap) {
+    this.userMap = userMap;
+    }    
+public void save() {      
+  System.out.println(userMap);
+  System.out.println(&quot;UserDao save method running....&quot;);
+  }
+}
+
+
+//xml
+&lt;bean id=&quot;u1&quot; class=&quot;com.demo.domain.User&quot;/&gt;
+&lt;bean id=&quot;u2&quot; class=&quot;com.demo.domain.User&quot;/&gt;
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;userMap&quot;&gt;
+        &lt;map&gt;            
+            &lt;entry key=&quot;user1&quot; value-ref=&quot;u1&quot;/&gt;
+            &lt;entry key=&quot;user2&quot; value-ref=&quot;u2&quot;/&gt;
+        &lt;/map&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><p>（5）集合数据类型（Properties）的注入</p>
+<pre><code>// java
+public class UserDaoImpl implements UserDao {
+    private Properties properties;
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
+  public void save() {
+    System.out.println(properties);
+    System.out.println(&quot;UserDao save method running....&quot;);
+  }
+}
+
+// xml
+&lt;bean id=&quot;userDao&quot; class=&quot;com.demo.dao.impl.UserDaoImpl&quot;&gt;
+    &lt;property name=&quot;properties&quot;&gt;
+        &lt;props&gt;
+            &lt;prop key=&quot;p1&quot;&gt;aaa&lt;/prop&gt;
+            &lt;prop key=&quot;p2&quot;&gt;bbb&lt;/prop&gt; 
+            &lt;prop key=&quot;p3&quot;&gt;ccc&lt;/prop&gt;
+        &lt;/props&gt;
+    &lt;/property&gt;
+&lt;/bean&gt;</code></pre><h3 id="3-9-引入其他配置文件（分模块开发）"><a href="#3-9-引入其他配置文件（分模块开发）" class="headerlink" title="3.9 引入其他配置文件（分模块开发）"></a>3.9 引入其他配置文件（分模块开发）</h3><p>实际开发中，Spring的配置内容非常多，这就导致Spring配置很繁杂且体积很大，所以，可以将部分配置拆解到其他配置文件中，而在Spring主配置文件通过import标签进行加载</p>
+<pre><code>import resource=&quot;applicationContext-xxx.xml&quot;/&gt;</code></pre><h2 id="4-spring相关API"><a href="#4-spring相关API" class="headerlink" title="4. spring相关API"></a>4. spring相关API</h2><h3 id="4-1-ApplicationContext的继承体系"><a href="#4-1-ApplicationContext的继承体系" class="headerlink" title="4.1 ApplicationContext的继承体系"></a>4.1 ApplicationContext的继承体系</h3><p>applicationContext：接口类型，代表应用上下文，可以通过其实例获得 Spring 容器中的 Bean 对象</p>
+<h3 id="4-2-ApplicationContext的实现类"><a href="#4-2-ApplicationContext的实现类" class="headerlink" title="4.2 ApplicationContext的实现类"></a>4.2 ApplicationContext的实现类</h3><p>1）ClassPathXmlApplicationContext </p>
+<p>​      它是从类的根路径下加载配置文件 推荐使用这种</p>
+<p>2）FileSystemXmlApplicationContext </p>
+<p>​      它是从磁盘路径上加载配置文件，配置文件可以在磁盘的任意位置。</p>
+<p>3）AnnotationConfigApplicationContext</p>
+<p>​      当使用注解配置容器对象时，需要使用此类来创建 spring 容器。它用来读取注解。</p>
+<h3 id="4-3-getBean-方法使用"><a href="#4-3-getBean-方法使用" class="headerlink" title="4.3 getBean()方法使用"></a>4.3 getBean()方法使用</h3><pre><code>public Object getBean(String name) throws BeansException {  
+  assertBeanFactoryActive();   
+  return getBeanFactory().getBean(name);
+}
+public &lt;T&gt; T getBean(Class&lt;T&gt; requiredType) throws BeansException {                       
+  assertBeanFactoryActive();
+  return getBeanFactory().getBean(requiredType);
+}</code></pre><p>其中，当参数的数据类型是字符串时，表示根据Bean的id从容器中获得Bean实例，返回是Object，需要强转。</p>
+<p>当参数的数据类型是Class类型时，表示根据类型从容器中匹配Bean实例，当容器中相同类型的Bean有多个时，则此方法会报错</p>
+<p><strong>getBean()方法使用</strong></p>
+<pre><code>ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+UserService userService1 = (UserService) applicationContext.getBean(&quot;userService&quot;);
+UserService userService2 = applicationContext.getBean(UserService.class);</code></pre>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.5717767.xyz" rel="external nofollow noreferrer">Hao Jie</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://blog.5717767.xyz/posts/2112151695.html">http://blog.5717767.xyz/posts/2112151695.html</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="http://blog.5717767.xyz" target="_blank">Hao Jie</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Java/">
+                                    <span class="chip bg-color">Java</span>
+                                </a>
+                            
+                                <a href="/tags/Spring/">
+                                    <span class="chip bg-color">Spring</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/posts/2991666428.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="MyBatis快速入门">
+                        
+                        <span class="card-title">MyBatis快速入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MyBatis基础知识并快速入门
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-09-13
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MyBatis/" class="post-category">
+                                    MyBatis
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MyBatis/">
+                        <span class="chip bg-color">MyBatis</span>
+                    </a>
+                    
+                    <a href="/tags/Java/">
+                        <span class="chip bg-color">Java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/posts/458106393.html">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Mac使用brew安装与配置MySQL">
+                        
+                        <span class="card-title">Mac使用brew安装与配置MySQL</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Mac使用brew安装与配置MySQL
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MySQL/" class="post-category">
+                                    MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                    <a href="/tags/Homebrew/">
+                        <span class="chip bg-color">Homebrew</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+    
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+    <footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">年份</span>
+            <a href="http://blog.5717767.xyz" target="_blank">HaoJie</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <span id="sitetime">载入运行时间...</span>
+            <script>
+                function siteTime() {
+                    window.setTimeout("siteTime()", 1000);
+                    var seconds = 1000;
+                    var minutes = seconds * 60;
+                    var hours = minutes * 60;
+                    var days = hours * 24;
+                    var years = days * 365;
+                    var today = new Date();
+                    var startYear = "2019";
+                    var startMonth = "4";
+                    var startDate = "17";
+                    var startHour = "0";
+                    var startMinute = "0";
+                    var startSecond = "0";
+                    var todayYear = today.getFullYear();
+                    var todayMonth = today.getMonth() + 1;
+                    var todayDate = today.getDate();
+                    var todayHour = today.getHours();
+                    var todayMinute = today.getMinutes();
+                    var todaySecond = today.getSeconds();
+                    var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                    var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                    var diff = t2 - t1;
+                    var diffYears = Math.floor(diff / years);
+                    var diffDays = Math.floor((diff / days) - diffYears * 365);
+                    var diffHours = Math.floor((diff - (diffYears * 365 + diffDays) * days) / hours);
+                    var diffMinutes = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours) /
+                        minutes);
+                    var diffSeconds = Math.floor((diff - (diffYears * 365 + diffDays) * days - diffHours * hours -
+                        diffMinutes * minutes) / seconds);
+                    if (startYear == todayYear) {
+                        document.getElementById("year").innerHTML = todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffDays + " 天 " + diffHours +
+                            " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    } else {
+                        document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                        document.getElementById("sitetime").innerHTML = "本站已安全运行 " + diffYears + " 年 " + diffDays +
+                            " 天 " + diffHours + " 小时 " + diffMinutes + " 分钟 " + diffSeconds + " 秒";
+                    }
+                }
+                setInterval(siteTime, 1000);
+            </script>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://beian.miit.gov.cn" target="_blank">浙ICP备19025718号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/yhj365" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:365435306@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=365435306" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 365435306" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+    <script type="text/javascript">
+        var OriginTitile = document.title, st;
+        document.addEventListener("visibilitychange", function () { document.hidden ? (document.title = "梦想还是要有的", clearTimeout(st)) : (document.title = "万一实现了呢", st = setTimeout(function () { document.title = OriginTitile }, 3e3)) })
+        </script>
+        <script type="text/javascript"> 
+      WIDGET = {FID: '1tFpFZ5Mtj'} 
+    </script> 
+    <script type="text/javascript" src="https://apip.weatherdt.com/float/static/js/r.js?v=1111"></script>
+</body>
+
+</html>
